@@ -80,10 +80,10 @@ Request 2 (correct credentials):
 } 
 
 Response: 
-{
+{ 
     "success":true,
-    "authToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJhODcxZGQzZWMwM2E4YWJlMTAwNDE5In0sImlhdCI6MTY1NTIwOTI1MH0.LE9Jn6qLgjJy9pGQlrCQRkMkkMjy0F0ix4PaKyn0k40"
-}
+    "authToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJhODcxZGQzZWMwM2E4YWJlMTAwNDE5In0sImlhdCI6MTY1NTIwOTI1MH0.LE9Jn6qLgjJy9pGQlrCQRkMkkMjy0F0ix4PaKyn0k40" 
+} 
 
 
 GET request at `http://localhost:5000/api/getusers`:  
@@ -102,7 +102,7 @@ Response:
     [ 
         { 
             "_id":"62a871dd3ec03a8abe100419","name":"Random","username":"random","password":"$2a$10$d2Oa7Pz7Emr3bPnCH5ij8ufpzmepR16SaW9ozm48Zr4p0aCo0xLr2", "imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0 
-        }, 
+        },  
         {
             "_id":"62a8764251686e0699f9e3d9","name":"Ravi","username":"ravi","password":"$2a$10$ZwYgLhD7YmyG2yYhu38ntOIAICYssPYGH9JUHzDTKXAy4rVABheXe", "imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0 
         }, 
@@ -111,11 +111,11 @@ Response:
         }, 
         {
             "_id":"62a8771351686e0699f9e3e8","name":"Random3","username":"Random3","password":"$2a$10$/zhnQE0IkclgHVMLGhT5Wuw.ZoNbw2mq4Hy0UhW7GYKHUYjYat6ZS","imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0
-        },
+        }, 
         {
             "_id":"62a87b6051686e0699f9e3ed","name":"random","username":"Random","password":"$2a$10$OEA1/ANX4QCaPRBuCEpIM.je4SE3PL.GNJglJg7lOc4sXJR9qHu92","imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0
-        }
-    ]
+        } 
+    ] 
 }  
 
 Request 2 (sending tampered or no auth-token): 
@@ -133,4 +133,5 @@ Response: Access denied
 1) Node.js  
 2) Express  
 3) JavaScript  
+4) ReactJS
 
