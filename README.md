@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# Steps to setup Locally
+Clone the Repository: `git clone "url of this repo"` 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+For Backend: 
 
-## Available Scripts
+NOTE: the backend folder is independent i..e it can be moved mout to other directory for better management 
+Install MongoDB (if not installed) 
+Run MongoDB server 
+Change the `mongooseURI` in `backend/connectDB.js` according to your local mongo server 
+In the backend folder directory run npm i to install node modules. 
+Run nodemon index.js to start the server 
 
-In the project directory, you can run:
+For Frontend: 
 
-### `npm start`
+run npm i in the root directory of the project to install node modules 
+run npm run start to start the project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Test Cases :
+POST request at `http://localhost:5000/api/createuser`:  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Request 1 (if any one of the required field i..e username , name or password is empty ):  
+{  
+    username:"" 
+    name:"random" 
+    imgURL:"" 
+    password:"123456" 
+}  
+Response:  
+{  
+    "success": false, 
+    "message": "Request is invalid"  
+}  
 
-### `npm test`
+Request 2 (correct request):  
+{   
+    username:"Random" 
+    name:"random" 
+    imgURL:"" 
+    password:"123456"  
+}  
+Response:  
+{
+    "success":true, 
+    "authToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJhODc3MTM1MTY4NmUwNjk5ZjllM2U4In0sImlhdCI6MTY1NTIwNzY5OX0.8YBaBQ7YFC_e88QrMNyMj9jim88NbFl-lhV_6uYo0ts" 
+}  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Request 3 (username is already present):  
+{   
+    username:"Random" 
+    name:"random2" 
+    imgURL:"" 
+    password:"123456"  
+}  
 
-### `npm run build`
+Response:  
+{  
+   "success":false, 
+   "message":"Username already exists"  
+}  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+POST request at `http://localhost:5000/api/login` 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Request 1 (incorrecr credentials): 
+{ 
+    username:"Joy", 
+    password:"99" 
+} 
 
-### `npm run eject`
+Response: 
+{
+    "success":false,
+    "message":"Please enter correct credentials or click forgot password"
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Request 2 (correct credentials): 
+{ 
+    username:"Random", 
+    password:"123456" 
+} 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Response: 
+{
+    "success":true,
+    "authToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJhODcxZGQzZWMwM2E4YWJlMTAwNDE5In0sImlhdCI6MTY1NTIwOTI1MH0.LE9Jn6qLgjJy9pGQlrCQRkMkkMjy0F0ix4PaKyn0k40"
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+GET request at `http://localhost:5000/api/getusers`:  
 
-## Learn More
+Request 1(correct request):  
+headers: 
+{ 
+    'Content-Type': 'application/json', 
+    'auth-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJhODc3MTM1MTY4NmUwNjk5ZjllM2U4In0sImlhdCI6MTY1NTIwNzY5OX0.8YBaBQ7YFC_e88QrMNyMj9jim88NbFl-lhV_6uYo0ts",  
+}  
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Response:  
+{  
+    "success":true, 
+    "userArray":
+    [ 
+        { 
+            "_id":"62a871dd3ec03a8abe100419","name":"Random","username":"random","password":"$2a$10$d2Oa7Pz7Emr3bPnCH5ij8ufpzmepR16SaW9ozm48Zr4p0aCo0xLr2", "imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0 
+        }, 
+        {
+            "_id":"62a8764251686e0699f9e3d9","name":"Ravi","username":"ravi","password":"$2a$10$ZwYgLhD7YmyG2yYhu38ntOIAICYssPYGH9JUHzDTKXAy4rVABheXe", "imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0 
+        }, 
+        { 
+            "_id":"62a876cd51686e0699f9e3e3","name":"Random2","username":"Random2","password":"$2a$10$qKXM.f.USWIZ/xTMbjM1e. MUxYvjq0KFoXAjVCpBeeGGPPhuX8HxO","imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0 
+        }, 
+        {
+            "_id":"62a8771351686e0699f9e3e8","name":"Random3","username":"Random3","password":"$2a$10$/zhnQE0IkclgHVMLGhT5Wuw.ZoNbw2mq4Hy0UhW7GYKHUYjYat6ZS","imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0
+        },
+        {
+            "_id":"62a87b6051686e0699f9e3ed","name":"random","username":"Random","password":"$2a$10$OEA1/ANX4QCaPRBuCEpIM.je4SE3PL.GNJglJg7lOc4sXJR9qHu92","imgURL":"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png","__v":0
+        }
+    ]
+}  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Request 2 (sending tampered or no auth-token): 
+headers: 
+{ 
+    'Content-Type': 'application/json', 
+    'auth-token':"12345",  
+}  
 
-### Code Splitting
+Response: Access denied 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Technologies used :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1) Node.js  
+2) Express  
+3) JavaScript  
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
